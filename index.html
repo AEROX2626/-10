@@ -30,6 +30,11 @@
                             100: '#f2f2f2',
                             900: '#0a0a0a',
                             950: '#050505',
+                        },
+                        gold: {
+                            400: '#F3E5AB',
+                            500: '#D4AF37',
+                            600: '#AA8C2C',
                         }
                     },
                     transitionDuration: {
@@ -48,16 +53,32 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
+        /* Premium Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8C2C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
         .nav-scrolled {
-            background-color: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background-color: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .btn-outline {
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
         
         .btn-outline::before {
@@ -70,7 +91,7 @@
             background-color: currentColor;
             transform: scaleX(0);
             transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             z-index: -1;
         }
 
@@ -80,28 +101,28 @@
         }
 
         .btn-outline:hover {
-            color: #fff !important;
+            color: #000 !important;
+            border-color: transparent;
         }
         
-        .btn-outline.dark-hover:hover {
-            color: #000 !important;
-        }
-
+        /* Advanced Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(60px) scale(0.96);
+            filter: blur(8px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0);
         }
 
         /* Image mask for logo to blend with dark backgrounds */
         .logo-blend {
             mix-blend-mode: screen;
-            filter: grayscale(100%) contrast(1.2);
+            filter: grayscale(100%) contrast(1.2) brightness(1.5);
         }
 
         /* Form Inputs Premium Styling */
@@ -109,27 +130,40 @@
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
             color: white;
-            padding: 12px 0;
+            padding: 16px 0;
             font-family: 'Assistant', sans-serif;
             font-weight: 300;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            font-size: 1.1rem;
         }
         .premium-input:focus {
             outline: none;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid #D4AF37;
+            background: rgba(255,255,255,0.02);
+            padding-right: 16px;
         }
         .premium-input::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
         }
         
         /* Product Card Zoom */
+        .product-card {
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.5s ease;
+        }
+        .product-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+        }
         .product-card img {
-            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .product-card:hover img {
-            transform: scale(1.08);
+            transform: scale(1.1) rotate(1deg);
         }
 
         /* Floating WhatsApp Button */
@@ -149,17 +183,70 @@
             justify-content: center;
             width: 64px;
             height: 64px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .whatsapp-float:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(-5deg);
             color: white;
             box-shadow: 0px 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* AI Chatbot Button & Window */
+        .ai-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: 0px 4px 30px rgba(212, 175, 55, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .ai-float:hover {
+            transform: scale(1.1);
+            background: #D4AF37;
+            color: #000;
+            box-shadow: 0px 10px 40px rgba(212, 175, 55, 0.6);
+        }
+        
+        .ai-float::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid #D4AF37;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.9); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .chat-typing-dot {
+            animation: chat-bounce 1.4s infinite ease-in-out both;
+        }
+        .chat-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .chat-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes chat-bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
         
         /* TikTok Section Premium Styling */
         .tiktok-preview {
-            background: linear-gradient(45deg, #050505, #111111);
+            background: linear-gradient(45deg, #020202, #0a0a0a);
             position: relative;
             overflow: hidden;
         }
@@ -167,12 +254,18 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.03)"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="rgba(212,175,55,0.05)"/></svg>');
             z-index: 0;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     </style>
 </head>
-<body id="home" class="bg-brand-50 text-brand-900 overflow-x-hidden selection:bg-black selection:text-white">
+<body id="home" class="bg-brand-50 text-brand-900 overflow-x-hidden selection:bg-gold-500 selection:text-black">
 
     <!-- Navigation -->
     <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 py-4 text-white">
@@ -214,21 +307,22 @@
     <!-- Hero Section -->
     <section class="relative h-screen w-full flex items-end justify-start overflow-hidden bg-black">
         <div class="absolute inset-0 z-0">
-            <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg" alt="משטחי שיש מעוצבים" class="w-full h-full object-cover object-center scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate] opacity-70">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+            <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg" alt="משטחי שיש מעוצבים" class="w-full h-full object-cover object-center scale-105 animate-[pulse_30s_ease-in-out_infinite_alternate] opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-black/50 to-transparent"></div>
+            <div class="absolute inset-0 bg-black/20"></div>
         </div>
         
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32 reveal">
-            <span class="block text-gray-300 text-sm md:text-base tracking-widest uppercase mb-4 font-light">יצירת מופת למטבח שלך</span>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-8">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-32 lg:pb-40 reveal">
+            <span class="block text-gold-500 text-sm md:text-base tracking-widest uppercase mb-6 font-medium">יצירת מופת למטבח שלך</span>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-[1.1] mb-8">
                 שיש מילניום.<br>
-                <span class="font-light text-gray-200">משטחי שיש מעוצבים.</span>
+                <span class="font-light text-gold-gradient block mt-2">אמנות באבן.</span>
             </h1>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#catalog" class="inline-flex items-center justify-center px-8 py-4 border border-white text-white font-medium tracking-wide btn-outline hover:text-black hover:bg-white text-lg w-full sm:w-auto">
+            <div class="flex flex-col sm:flex-row gap-6 mt-12">
+                <a href="#catalog" class="inline-flex items-center justify-center px-10 py-5 bg-white text-black font-medium tracking-wide transition-all duration-500 hover:bg-gold-500 text-lg w-full sm:w-auto shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)]">
                     צפה בקטלוג המלא
                 </a>
-                <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium tracking-wide transition duration-300 hover:bg-gray-200 text-lg w-full sm:w-auto">
+                <a href="#contact" class="inline-flex items-center justify-center px-10 py-5 border border-white/30 text-white font-medium tracking-wide btn-outline hover:text-black hover:bg-white text-lg w-full sm:w-auto backdrop-blur-sm">
                     צור קשר לייעוץ
                 </a>
             </div>
@@ -239,14 +333,14 @@
     <section id="about" class="bg-brand-950 text-white overflow-hidden">
         <div class="flex flex-col lg:flex-row">
             <!-- Image Side -->
-            <div class="w-full lg:w-1/2 relative h-[50vh] lg:h-auto">
-                <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7567.jpg" alt="אודות שיש מילניום" class="absolute inset-0 w-full h-full object-cover opacity-80">
+            <div class="w-full lg:w-1/2 relative h-[50vh] lg:h-auto overflow-hidden group">
+                <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7567.jpg" alt="אודות שיש מילניום" class="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-[2s] group-hover:scale-110">
             </div>
             
             <!-- Text Side -->
             <div class="w-full lg:w-1/2 py-20 px-6 lg:py-32 lg:px-20 xl:px-32 flex flex-col justify-center reveal">
-                <span class="uppercase tracking-widest text-xs text-gray-400 mb-6 font-semibold">המורשת שלנו</span>
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">3 דורות של אהבה למקצוע.</h2>
+                <span class="uppercase tracking-widest text-xs text-gold-500 mb-6 font-semibold">המורשת שלנו</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight text-white">3 דורות של <span class="text-gold-gradient">אהבה למקצוע.</span></h2>
                 <div class="space-y-6 text-gray-300 text-lg font-light leading-relaxed">
                     <p>
                         חברת שיש מילניום נוסדה בשנת 1985 ע"י דוד נחמיאס וכיום מונה 3 דורות לשיש למטבחים. האהבה למקצוע עוברת בגנים. חברתינו עוסקת ביבוא, יצוא, ייצור ושיווק של משטחי שיש מעוצבים, ביניהם שיש למטבחים ולאמבט, מסוג משטחי אבן טבעית, גרניט פורצלן ומשטחי קוורץ של החברות המובילות בעולם.
@@ -585,6 +679,53 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- AI Chatbot Floating Button -->
+    <div id="ai-chat-btn" class="ai-float" aria-label="Chat with AI Assistant">
+        <i class="fas fa-sparkles text-xl"></i>
+    </div>
+
+    <!-- AI Chatbot Window -->
+    <div id="ai-chat-window" class="fixed bottom-24 right-6 lg:right-12 w-[350px] sm:w-[400px] h-[500px] max-h-[70vh] z-[101] glass-panel rounded-2xl flex flex-col overflow-hidden transition-all duration-500 opacity-0 pointer-events-none translate-y-10">
+        <!-- Chat Header -->
+        <div class="bg-gradient-to-r from-[#111] to-[#222] border-b border-white/10 p-5 flex justify-between items-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg width=20 height=20 xmlns=http://www.w3.org/2000/svg><circle cx=2 cy=2 r=1 fill=rgba(212,175,55,0.1)/></svg>')] opacity-50"></div>
+            <div class="flex items-center gap-3 relative z-10">
+                <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-500/50 flex items-center justify-center text-gold-500">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-medium text-lg">יועץ שיש וירטואלי</h3>
+                    <p class="text-gold-500 text-xs font-light tracking-wide">מבוסס בינה מלאכותית</p>
+                </div>
+            </div>
+            <button id="close-chat-btn" class="text-gray-400 hover:text-white transition-colors relative z-10 text-xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="flex-1 p-5 overflow-y-auto flex flex-col gap-2 scroll-smooth">
+            <!-- Typing Indicator (Hidden by default) -->
+            <div id="typing-indicator" class="hidden justify-start mb-4">
+                <div class="bg-gray-800/80 border border-white/5 rounded-2xl rounded-tl-none p-4 flex gap-1 items-center">
+                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
+                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
+                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="p-4 bg-[#0a0a0a] border-t border-white/10">
+            <form id="chat-form" class="relative flex items-center">
+                <input type="text" id="chat-input" placeholder="שאל/י אותי על סוגי שיש..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pr-5 pl-12 text-white font-light text-sm focus:outline-none focus:border-gold-500/50 transition-colors placeholder:text-gray-500" autocomplete="off">
+                <button type="submit" class="absolute left-2 w-8 h-8 rounded-full bg-gold-500 text-black flex items-center justify-center hover:bg-gold-400 transition-colors focus:outline-none">
+                    <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Interactive Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -641,6 +782,116 @@
             revealElements.forEach(el => {
                 revealObserver.observe(el);
             });
+
+            // ==========================================
+            // AI Chatbot Logic (Gemini API)
+            // ==========================================
+            const aiChatBtn = document.getElementById('ai-chat-btn');
+            const aiChatWindow = document.getElementById('ai-chat-window');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const typingIndicator = document.getElementById('typing-indicator');
+
+            let aiChatHistory = [];
+            const systemPrompt = "אתה יועץ וירטואלי מומחה, יוקרתי ואדיב מטעם 'שיש מילניום' - חברת בוטיק עם 3 דורות של ניסיון בייבוא, ייצור ושיווק משטחי שיש למטבחים ולאמבט. \nהחומרים שאתה מומחה בהם: פורצלן (עמיד מאוד, מראה מודרני), קוורץ (חזק, פרקטי), אבן טבעית (יוקרתי, קלאסי), ואוניקס. \nהסגנון שלך: שירותי, מקצועי, יוקרתי, משדר אמינות ואיכות. \nעליך לעזור לגולשים להבין איזה משטח מתאים לצרכים שלהם. \nבמידת הצורך, הזמן אותם בחום לאולם התצוגה המרהיב שלנו ברחוב היוזם 2, קרית ביאליק, או להשאיר פרטים בטופס שבאתר. \nהקפד על עברית תקינה, שפה עשירה אך נגישה, ותשובות קצרות וקולעות (עד 3 משפטים אלא אם התבקשת להרחיב). לעולם אל תמציא מחירים מדויקים.";
+
+            // Toggle Chat Window
+            aiChatBtn.addEventListener('click', () => {
+                const isOpen = !aiChatWindow.classList.contains('opacity-0');
+                if (isOpen) {
+                    closeChat();
+                } else {
+                    openChat();
+                }
+            });
+
+            closeChatBtn.addEventListener('click', closeChat);
+
+            function openChat() {
+                aiChatWindow.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+                if(aiChatHistory.length === 0) {
+                    setTimeout(() => {
+                        addMessageToUI('system', 'ברוכים הבאים לשיש מילניום. ✦\nאני היועץ הווירטואלי האישי שלכם.\nאיך אוכל לסייע לכם בעיצוב מטבח החלומות היום?');
+                    }, 300);
+                }
+                chatInput.focus();
+            }
+
+            function closeChat() {
+                aiChatWindow.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+            }
+
+            // Handle Form Submission
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userText = chatInput.value.trim();
+                if(!userText) return;
+
+                addMessageToUI('user', userText);
+                chatInput.value = '';
+                
+                aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
+                
+                // Show typing indicator at the end
+                chatMessages.appendChild(typingIndicator);
+                typingIndicator.classList.remove('hidden');
+                typingIndicator.classList.add('flex');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                try {
+                    const apiKey = ""; // API Key is automatically handled by the environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                    const payload = {
+                        contents: aiChatHistory,
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    };
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if(!response.ok) throw new Error('API Error');
+
+                    const data = await response.json();
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    
+                    aiChatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+                    typingIndicator.classList.remove('flex');
+                    typingIndicator.classList.add('hidden');
+                    addMessageToUI('model', aiText);
+
+                } catch (error) {
+                    console.error("AI Chat Error:", error);
+                    typingIndicator.classList.remove('flex');
+                    typingIndicator.classList.add('hidden');
+                    addMessageToUI('system', 'מצטערים, חלה שגיאה בחיבור ליועץ. אנא נסו שוב מאוחר יותר או צרו קשר בטלפון.');
+                }
+            });
+
+            function addMessageToUI(sender, text) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex ${sender === 'user' ? 'justify-start' : 'justify-end'} mb-4 reveal active`;
+                
+                const bubble = document.createElement('div');
+                if (sender === 'user') {
+                    bubble.className = `max-w-[85%] rounded-2xl p-4 text-sm font-medium bg-gold-500 text-black rounded-tr-sm shadow-md`;
+                } else {
+                    bubble.className = `max-w-[85%] rounded-2xl p-4 text-sm font-light bg-gray-800/80 text-white border border-white/5 rounded-tl-sm shadow-lg leading-relaxed`;
+                }
+                
+                // format text basic newlines and asterisks for bold
+                let formattedText = text.replace(/\n/g, '<br>');
+                formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                bubble.innerHTML = formattedText;
+                
+                msgDiv.appendChild(bubble);
+                chatMessages.insertBefore(msgDiv, typingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
         });
     </script>
 </body>
