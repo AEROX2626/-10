@@ -1,18 +1,15 @@
+
 <!DOCTYPE html>
-<html dir="rtl" lang="he-IL" class="scroll-smooth">
+<html dir="rtl" lang="he-IL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>שיש מילניום - משטחי שיש מעוצבים | קטלוג וצור קשר</title>
-    <meta name="description" content="חברתינו עוסקת ביבוא, יצוא, ייצור ושיווק של משטחי שיש מעוצבים, ביניהם שיש למטבחים ולאמבט, מסוג משטחי אבן טבעית, גרניט פורצלן ומשטחי קוורץ של החברות המובילות בעולם.">
+    <title>שיש מיליניום | עיצוב מטבחים טכנולוגי</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Heebo:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,878 +17,580 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Heebo', 'Assistant', 'sans-serif'],
-                        serif: ['Assistant', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Heebo', 'sans-serif'] },
                     colors: {
-                        brand: {
-                            50: '#f9f9f9',
-                            100: '#f2f2f2',
-                            900: '#0a0a0a',
-                            950: '#050505',
-                        },
-                        gold: {
-                            400: '#F3E5AB',
-                            500: '#D4AF37',
-                            600: '#AA8C2C',
-                        }
-                    },
-                    transitionDuration: {
-                        '800': '800ms',
-                        '1500': '1500ms',
+                        darkBg: '#0f0c1b',
+                        primary: '#8D69FF',
+                        primaryDark: '#5a3bb8',
+                        surface: '#1a162b',
                     }
                 }
             }
         }
     </script>
-    
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* Custom Styles for Premium Mercedes-like Feel */
         body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        /* Premium Gold Gradient Text */
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8C2C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-color: #0f0c1b;
+            color: #ececec;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Glassmorphism Panels */
-        .glass-panel {
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background-color: #0f0c1b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
         }
 
-        .nav-scrolled {
-            background-color: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        /* Glowing Text */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(141, 105, 255, 0.5);
         }
 
-        .btn-outline {
+        /* Custom AI Scanner Effect */
+        .ai-scanner-box {
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border: 1px solid rgba(141, 105, 255, 0.3);
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #1a162b 0%, #0f0c1b 100%);
         }
         
-        .btn-outline::before {
-            content: '';
+        .ai-scan-line {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-color: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: -1;
+            height: 4px;
+            background: #8D69FF;
+            box-shadow: 0 0 15px #8D69FF, 0 0 30px #8D69FF;
+            animation: scan 3s infinite linear;
         }
 
-        .btn-outline:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .btn-outline:hover {
-            color: #000 !important;
-            border-color: transparent;
-        }
-        
-        /* Advanced Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px) scale(0.96);
-            filter: blur(8px);
-            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-
-        /* Image mask for logo to blend with dark backgrounds */
-        .logo-blend {
-            mix-blend-mode: screen;
-            filter: grayscale(100%) contrast(1.2) brightness(1.5);
-        }
-
-        /* Form Inputs Premium Styling */
-        .premium-input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 16px 0;
-            font-family: 'Assistant', sans-serif;
-            font-weight: 300;
-            transition: all 0.4s ease;
-            font-size: 1.1rem;
-        }
-        .premium-input:focus {
-            outline: none;
-            border-bottom: 1px solid #D4AF37;
-            background: rgba(255,255,255,0.02);
-            padding-right: 16px;
-        }
-        .premium-input::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        
-        /* Product Card Zoom */
-        .product-card {
-            border-radius: 4px;
-            overflow: hidden;
-            background: #fff;
-            transition: all 0.5s ease;
-        }
-        .product-card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transform: translateY(-10px);
-        }
-        .product-card img {
-            transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .product-card:hover img {
-            transform: scale(1.1) rotate(1deg);
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
         }
 
         /* Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 40px;
+            left: 40px;
             background-color: #25d366;
             color: #FFF;
             border-radius: 50px;
             text-align: center;
-            font-size: 32px;
-            box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.4);
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(37, 211, 102, 0.4);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 60px;
+            height: 60px;
+            transition: all 0.3s ease;
         }
+
         .whatsapp-float:hover {
-            transform: scale(1.15) rotate(-5deg);
-            color: white;
-            box-shadow: 0px 6px 25px rgba(37, 211, 102, 0.6);
-        }
-
-        /* AI Chatbot Button & Window */
-        .ai-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            border: 2px solid #D4AF37;
-            color: #D4AF37;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 28px;
-            box-shadow: 0px 4px 30px rgba(212, 175, 55, 0.3);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .ai-float:hover {
             transform: scale(1.1);
-            background: #D4AF37;
-            color: #000;
-            box-shadow: 0px 10px 40px rgba(212, 175, 55, 0.6);
-        }
-        
-        .ai-float::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 1px solid #D4AF37;
-            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            box-shadow: 0px 6px 20px rgba(37, 211, 102, 0.6);
+            color: #fff;
         }
 
-        @keyframes pulse-ring {
-            0% { transform: scale(0.9); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
+        /* Custom Button */
+        .btn-primary {
+            background: linear-gradient(135deg, #8D69FF 0%, #5a3bb8 100%);
+            box-shadow: 0 10px 20px -10px rgba(141, 105, 255, 0.6);
+            transition: all 0.3s ease;
         }
-
-        .chat-typing-dot {
-            animation: chat-bounce 1.4s infinite ease-in-out both;
-        }
-        .chat-typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .chat-typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        
-        @keyframes chat-bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
-        
-        /* TikTok Section Premium Styling */
-        .tiktok-preview {
-            background: linear-gradient(45deg, #020202, #0a0a0a);
-            position: relative;
-            overflow: hidden;
-        }
-        .tiktok-preview::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="rgba(212,175,55,0.05)"/></svg>');
-            z-index: 0;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -10px rgba(141, 105, 255, 0.8);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+        ::-webkit-scrollbar-track { background: #0f0c1b; }
+        ::-webkit-scrollbar-thumb { background: #8D69FF; border-radius: 10px; }
+
+        /* FAQ Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .faq-item.active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
-<body id="home" class="bg-brand-50 text-brand-900 overflow-x-hidden selection:bg-gold-500 selection:text-black">
+<body class="antialiased selection:bg-primary selection:text-white">
 
-    <!-- Navigation -->
-    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 py-4 text-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="lottie-preloader" style="width: 200px; height: 200px;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="text-2xl font-black tracking-tight flex items-center gap-2 z-50">
+                <i class="fa-solid fa-layer-group text-primary"></i>
+                שיש מיליניום
+            </div>
             
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Links (Desktop) -->
-            <nav class="hidden lg:flex space-x-8 space-x-reverse items-center text-sm font-medium tracking-wide">
-                <a href="#home" class="hover:text-gray-300 transition-colors border-b border-transparent hover:border-white pb-1">בית</a>
-                <a href="#about" class="hover:text-gray-300 transition-colors border-b border-transparent hover:border-white pb-1">אודות</a>
-                <a href="#catalog" class="hover:text-gray-300 transition-colors border-b border-transparent hover:border-white pb-1">קטלוג מלא</a>
-                <a href="#services" class="hover:text-gray-300 transition-colors border-b border-transparent hover:border-white pb-1">שירותים</a>
-                <a href="#contact" class="hover:text-gray-300 transition-colors border-b border-transparent hover:border-white pb-1">יצירת קשר</a>
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex gap-8 text-sm font-bold">
+                <a href="#home" class="hover:text-primary transition-colors">בית</a>
+                <a href="#process" class="hover:text-primary transition-colors">התהליך</a>
+                <a href="#articles" class="hover:text-primary transition-colors">מדריך לבחירה</a>
+                <a href="#ai-feature" class="hover:text-primary transition-colors">AI Vision</a>
+                <a href="#faq" class="hover:text-primary transition-colors">שאלות נפוצות</a>
+                <a href="#tiktok" class="hover:text-primary transition-colors">טיקטוק</a>
             </nav>
+            
+            <div class="hidden lg:block">
+                <a href="https://wa.me/972543034582" target="_blank" class="btn-primary px-6 py-2 rounded-full font-bold text-sm">
+                    לקביעת פגישה
+                </a>
+            </div>
 
-            <!-- Logo -->
-            <a href="#home" class="block relative z-10 w-32 h-16 overflow-hidden flex items-center justify-center bg-white/10 rounded backdrop-blur-sm px-2">
-                <img src="https://m-marble.co.il/wp-content/uploads/2023/08/cropped-logo.jpeg" alt="שיש מילניום" class="object-contain w-full h-full">
-            </a>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-brand-950 text-white flex flex-col justify-center items-center space-y-8 text-2xl font-light transform translate-x-full transition-transform duration-500 lg:hidden">
-            <button id="close-menu-btn" class="absolute top-8 left-8 text-3xl">
-                <i class="fas fa-times"></i>
+            <!-- Mobile Hamburger Button -->
+            <button id="menu-btn" class="lg:hidden text-2xl text-white z-50 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
             </button>
-            <a href="#home" class="mobile-link hover:text-gray-400">בית</a>
-            <a href="#about" class="mobile-link hover:text-gray-400">אודות</a>
-            <a href="#catalog" class="mobile-link hover:text-gray-400">קטלוג מלא</a>
-            <a href="#services" class="mobile-link hover:text-gray-400">שירותים</a>
-            <a href="#contact" class="mobile-link hover:text-gray-400">יצירת קשר</a>
         </div>
     </header>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-darkBg/95 backdrop-blur-xl z-40 transform translate-x-full flex flex-col items-center justify-center pt-20">
+        <nav class="flex flex-col gap-6 text-2xl font-bold text-center">
+            <a href="#home" class="mobile-link hover:text-primary transition-colors">בית</a>
+            <a href="#process" class="mobile-link hover:text-primary transition-colors">התהליך שלנו</a>
+            <a href="#articles" class="mobile-link hover:text-primary transition-colors">מדריך לבחירת שיש</a>
+            <a href="#ai-feature" class="mobile-link hover:text-primary transition-colors">טכנולוגיית AI</a>
+            <a href="#faq" class="mobile-link hover:text-primary transition-colors">שאלות נפוצות</a>
+            <a href="#tiktok" class="mobile-link hover:text-primary transition-colors">הפרויקטים שלנו</a>
+            <a href="https://wa.me/972543034582" target="_blank" class="btn-primary px-8 py-3 rounded-full font-bold text-lg mt-6 inline-block">
+                דברו איתנו בוואטסאפ
+            </a>
+        </nav>
+    </div>
+
     <!-- Hero Section -->
-    <section class="relative h-screen w-full flex items-end justify-start overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0">
-            <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg" alt="משטחי שיש מעוצבים" class="w-full h-full object-cover object-center scale-105 animate-[pulse_30s_ease-in-out_infinite_alternate] opacity-60">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-black/50 to-transparent"></div>
-            <div class="absolute inset-0 bg-black/20"></div>
-        </div>
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] -z-10"></div>
         
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-32 lg:pb-40 reveal">
-            <span class="block text-gold-500 text-sm md:text-base tracking-widest uppercase mb-6 font-medium">יצירת מופת למטבח שלך</span>
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-[1.1] mb-8">
-                שיש מילניום.<br>
-                <span class="font-light text-gold-gradient block mt-2">אמנות באבן.</span>
+        <div class="max-w-7xl mx-auto px-6 text-center z-10">
+            <h1 class="gsap-reveal text-5xl md:text-8xl font-black mb-6 leading-tight">
+                האומנות של הטבע.<br>
+                <span class="text-primary glow-text">הדיוק של המחר.</span>
             </h1>
-            <div class="flex flex-col sm:flex-row gap-6 mt-12">
-                <a href="#catalog" class="inline-flex items-center justify-center px-10 py-5 bg-white text-black font-medium tracking-wide transition-all duration-500 hover:bg-gold-500 text-lg w-full sm:w-auto shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)]">
-                    צפה בקטלוג המלא
+            <p class="gsap-reveal text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                חברת שיש מיליניום מביאה את מהפכת הטכנולוגיה לעיצוב המטבח שלכם. ייצור והתקנת משטחי שיש בסטנדרט חסר פשרות.
+            </p>
+            <div class="gsap-reveal flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#ai-feature" class="btn-primary px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-microchip"></i> נסו את מערכת ה-AI
                 </a>
-                <a href="#contact" class="inline-flex items-center justify-center px-10 py-5 border border-white/30 text-white font-medium tracking-wide btn-outline hover:text-black hover:bg-white text-lg w-full sm:w-auto backdrop-blur-sm">
-                    צור קשר לייעוץ
+                <a href="#process" class="border border-white/20 hover:border-primary hover:text-primary px-8 py-4 rounded-full font-bold text-lg transition-all w-full sm:w-auto justify-center">
+                    איך זה עובד?
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Brand Story (About) -->
-    <section id="about" class="bg-brand-950 text-white overflow-hidden">
-        <div class="flex flex-col lg:flex-row">
-            <!-- Image Side -->
-            <div class="w-full lg:w-1/2 relative h-[50vh] lg:h-auto overflow-hidden group">
-                <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7567.jpg" alt="אודות שיש מילניום" class="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-[2s] group-hover:scale-110">
+    <!-- Process Section -->
+    <section id="process" class="py-32 bg-surface/30 border-y border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 gsap-slide-up">
+                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block">שלב אחרי שלב</span>
+                <h2 class="text-4xl md:text-5xl font-black mb-4">הדרך למטבח המושלם</h2>
+                <p class="text-gray-400 text-lg">תהליך העבודה שלנו משלב מומחיות מסורתית עם טכנולוגיה מתקדמת.</p>
             </div>
-            
-            <!-- Text Side -->
-            <div class="w-full lg:w-1/2 py-20 px-6 lg:py-32 lg:px-20 xl:px-32 flex flex-col justify-center reveal">
-                <span class="uppercase tracking-widest text-xs text-gold-500 mb-6 font-semibold">המורשת שלנו</span>
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight text-white">3 דורות של <span class="text-gold-gradient">אהבה למקצוע.</span></h2>
-                <div class="space-y-6 text-gray-300 text-lg font-light leading-relaxed">
-                    <p>
-                        חברת שיש מילניום נוסדה בשנת 1985 ע"י דוד נחמיאס וכיום מונה 3 דורות לשיש למטבחים. האהבה למקצוע עוברת בגנים. חברתינו עוסקת ביבוא, יצוא, ייצור ושיווק של משטחי שיש מעוצבים, ביניהם שיש למטבחים ולאמבט, מסוג משטחי אבן טבעית, גרניט פורצלן ומשטחי קוורץ של החברות המובילות בעולם.
-                    </p>
-                    <p>
-                        במילניום תקבלו מעטפת משפחתית שתלווה אתכם בכל תהליך השיש מרגע הבחירה והעיצוב ועד לרגע ההתקנה. אנו מתמחים בעבודות ייחודיות ואומנותיות, משווקים למוסדות, משרד הביטחון, לבתי מלון ולצרכנים פרטיים.
-                    </p>
-                    <p>
-                        מבצעים גם עבודות לפי תוכניות אדריכליות במקום, אולם תצוגה מרהיב, מבחר עצום של חומרים וצוות ייעוץ מקצועי ואדיב שיעזור לכם להבין ולדייק את הצורך שלכם. אתם מוזמנים להגיע אלינו, להתרשם מהחומרים ומהמוצרים, לקבל ייעוץ מקצועי בכל נושא ולבחור את המוצר הטוב ביותר עבורכם.
-                    </p>
+
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-l from-transparent via-primary to-transparent -translate-y-1/2 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors">
+                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">1</div>
+                    <h3 class="text-xl font-bold mb-3">פגישת אפיון ומדידה</h3>
+                    <p class="text-sm text-gray-400">נפגשים במטבח שלכם, מבינים את הצרכים, ומבצעים מדידות מדויקות בלייזר.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors mt-0 md:mt-12">
+                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">2</div>
+                    <h3 class="text-xl font-bold mb-3">הדמיית AI</h3>
+                    <p class="text-sm text-gray-400">משתמשים במערכת ה-Vision שלנו כדי לראות בדיוק איך השיש יראה במטבח שלכם טרם החיתוך.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors">
+                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">3</div>
+                    <h3 class="text-xl font-bold mb-3">ייצור ו-CNC</h3>
+                    <p class="text-sm text-gray-400">חיתוך מדויק ברמת המילימטר במפעל הטכנולוגי שלנו, ליצירת גימורים מושלמים.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors mt-0 md:mt-12">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl text-white mx-auto mb-6 shadow-[0_0_20px_rgba(141,105,255,0.6)]">4</div>
+                    <h3 class="text-xl font-bold mb-3">התקנה חכמה</h3>
+                    <p class="text-sm text-gray-400">צוות המתקינים המומחים שלנו מגיע ליום עבודה מרוכז, נקי ומהיר. תתחדשו!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Full Catalog Section -->
-    <section id="catalog" class="py-24 lg:py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="mb-16 flex flex-col md:flex-row justify-between items-end gap-6 reveal">
-                <div>
-                    <span class="text-gray-500 uppercase tracking-widest text-sm font-semibold mb-2 block">הקולקציה</span>
-                    <h2 class="text-4xl md:text-5xl font-light">קטלוג מוצרים.</h2>
+    <!-- Articles / Info Section -->
+    <section id="articles" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gsap-slide-up">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-black mb-4">איך לבחור שיש למטבח?</h2>
+                    <p class="text-gray-400 text-lg">גרניט, קוורץ או פורצלן? אספנו עבורכם את כל המידע שצריך לדעת לפני שמקבלים החלטה על משטח העבודה שלכם.</p>
                 </div>
-                <p class="text-gray-500 text-lg max-w-xl font-light">
-                    גלו את מגוון המשטחים שלנו - מפורצלן עמיד, דרך קוורץ מודרני ועד לאבן טבעית יוקרתית. כל משטח הוא יצירת אמנות.
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
+                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
+                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">גרניט פורצלן מול קוורץ</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            פורצלן מציע עמידות חסרת פשרות לחום ושריטות, בעוד קוורץ (כמו אבן קיסר) מעניק גמישות עיצובית ומראה אחיד. מה מתאים לסגנון הבישול שלכם?
+                        </p>
+                        <span class="text-primary text-sm font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> חומרים
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
+                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
+                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">תחזוקה וניקיון שוטף</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            סוד הקסם בשיש איכותי הוא רמת הספיגה שלו. גלו אילו משטחים דורשים מינימום תחזוקה, עמידים בפני כתמי כורכום ויין, וקלים לניקוי יומיומי.
+                        </p>
+                        <span class="text-primary text-sm font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles"></i> תחזוקה
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
+                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
+                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">התאמת צבעים ותאורה</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            שיש כהה למראה דרמטי או שיש בהיר עם עורקים לפתיחת המרחב? איך תאורת המטבח (טבעית ומלאכותית) משפיעה על הגוון הסופי של המשטח.
+                        </p>
+                        <span class="text-primary text-sm font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-palette"></i> עיצוב
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Feature Section -->
+    <section id="ai-feature" class="py-32 bg-surface/50 border-y border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="gsap-slide-up">
+                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block">Millennium AI-Vision™</span>
+                <h2 class="text-4xl md:text-5xl font-black mb-6">לראות את המטבח שלכם <br>באור חדש לגמרי.</h2>
+                <p class="text-gray-400 text-lg mb-8">
+                    אל תנחשו איך השיש יראה. באמצעות מערכת הבינה המלאכותית המתקדמת שלנו, פשוט צלמו את המטבח הקיים שלכם, בחרו דגם שיש, וה-AI שלנו ייצר עבורכם הדמיה פוטו-ריאליסטית מדויקת בתוך שניות.
                 </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> התאמה מושלמת לתאורה הטבעית במטבח.</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> זיהוי חכם של כיורים וכיריים.</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> השוואת עשרות דגמי שיש בקליק אחד.</li>
+                </ul>
             </div>
 
-            <!-- Catalog Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="gsap-slide-up ai-scanner-box h-[500px] p-8 flex flex-col justify-between">
+                <div class="ai-scan-line"></div>
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="text-xs text-gray-500 font-mono">Millennium-AI Engine v2.4</div>
+                </div>
                 
-                <!-- Catalog Item 1 -->
-                <div class="product-card group cursor-pointer reveal">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-100 relative">
-                        <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7602.jpg" alt="פורצלן קלקטה" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                        <span class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 uppercase tracking-wider font-medium">פורצלן</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">קולקציית פורצלן אקסקלוסיבית</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">עמידות לחום, שריטות וכתמים. מראה שיש טבעי עם תחזוקה אפסית.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
+                <div class="flex-1 border-2 border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center text-center p-6 bg-black/20 backdrop-blur-sm relative overflow-hidden group">
+                    <i class="fa-solid fa-camera text-4xl text-gray-500 mb-4 group-hover:text-primary transition-colors"></i>
+                    <h3 class="text-xl font-bold mb-2">העלו תמונה של המטבח</h3>
+                    <p class="text-sm text-gray-400">גררו תמונה לכאן או לחצו לבחירה</p>
                 </div>
 
-                <!-- Catalog Item 2 -->
-                <div class="product-card group cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-100 relative">
-                        <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7604.jpg" alt="קוורץ פרימיום" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                        <span class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 uppercase tracking-wider font-medium">קוורץ</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">משטחי קוורץ מעוצבים</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">חוזק הנדסי המשלב קריסטלי קוורץ טבעיים. מושלם למטבח המודרני והפעיל.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
+                <div class="mt-6 flex gap-3 overflow-x-hidden">
+                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-primary cursor-pointer"></div>
+                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-transparent opacity-50 cursor-pointer"></div>
+                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-transparent opacity-50 cursor-pointer"></div>
                 </div>
-
-                <!-- Catalog Item 3 -->
-                <div class="product-card group cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-100 relative">
-                        <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg" alt="אבן טבעית" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                        <span class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 uppercase tracking-wider font-medium">אבן טבעית</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">אבן טבעית וגרניט</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">יצירת אמנות חד פעמית של הטבע. מראה עוצר נשימה ויוקרה חסרת פשרות.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
-                </div>
-
-                <!-- Catalog Item 4 (Placeholder styling) -->
-                <div class="product-card group cursor-pointer reveal">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-200 relative flex items-center justify-center">
-                        <img src="https://placehold.co/800x600/e2e8f0/475569?text=Onyx+Collection" alt="אוניקס" class="w-full h-full object-cover mix-blend-multiply">
-                        <span class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 uppercase tracking-wider font-medium">פרימיום</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">קולקציית אוניקס</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">שקיפות מרהיבה וטקסטורות עמוקות המאפשרות שילוב תאורה נסתרת מרשימה.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
-                </div>
-
-                <!-- Catalog Item 5 (Placeholder styling) -->
-                <div class="product-card group cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-800 relative flex items-center justify-center">
-                         <img src="https://placehold.co/800x600/1e293b/94a3b8?text=Dark+Matte" alt="גימור מט" class="w-full h-full object-cover mix-blend-overlay opacity-80">
-                        <span class="absolute top-4 right-4 bg-white text-black text-xs px-3 py-1 uppercase tracking-wider font-medium">חדש</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">קולקציית מט כהה</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">המראה המודרני והתעשייתי. גימורי מט אלגנטיים במניפת גוונים כהים ועמוקים.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
-                </div>
-
-                <!-- Catalog Item 6 (Placeholder styling) -->
-                <div class="product-card group cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="overflow-hidden aspect-[4/3] bg-gray-100 relative flex items-center justify-center">
-                         <img src="https://placehold.co/800x600/f8fafc/64748b?text=Calacatta+Gold" alt="קלקטה גולד" class="w-full h-full object-cover mix-blend-multiply">
-                        <span class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 uppercase tracking-wider font-medium">קלאסי</span>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">דגמי קלקטה קלאסיים</h3>
-                        <p class="text-gray-500 font-light text-sm mb-4">רקע לבן צחור עם גידים דרמטיים בגווני אפור וזהב. מראה על-זמני יוקרתי.</p>
-                        <a href="#contact" class="text-sm border-b border-black pb-1 font-medium hover:text-gray-600 transition-colors">לפרטים נוספים <i class="fas fa-arrow-left ml-1 text-xs"></i></a>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 bg-brand-50 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl font-light">השירותים שלנו.</h2>
-                <p class="mt-4 text-gray-500 max-w-2xl mx-auto">מעטפת שלמה ומקצועית, משלב התכנון והייעוץ, דרך חיתוך ועיבוד טכנולוגי מתקדם, ועד להתקנה מושלמת בבית הלקוח.</p>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16 gsap-slide-up">
+                <h2 class="text-4xl font-black mb-4">שאלות נפוצות</h2>
+                <p class="text-gray-400">כל מה שצריך לדעת לפני שיוצאים לדרך.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-white p-10 shadow-sm reveal">
-                    <div class="text-4xl mb-6 text-gray-800"><i class="fas fa-comments"></i></div>
-                    <h3 class="text-xl font-bold mb-3">ייעוץ ותכנון אישי</h3>
-                    <p class="text-gray-500 font-light text-sm">ליווי צמוד באולם התצוגה, התאמת החומרים לצרכים הייחודיים שלכם ולסגנון העיצובי.</p>
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold">תוך כמה זמן מתבצעת ההתקנה?</h3>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer text-gray-400 text-sm">
+                        מרגע ביצוע המדידה הסופית במטבח שלכם, הייצור והחיתוך במפעל לוקחים עד 7 ימי עסקים. לאחר מכן, נתאם יום התקנה מרוכז שבו צוות המומחים שלנו ירכיב את השיש בצורה מושלמת.
+                    </div>
                 </div>
-                <div class="bg-white p-10 shadow-sm reveal" style="transition-delay: 100ms;">
-                    <div class="text-4xl mb-6 text-gray-800"><i class="fas fa-cogs"></i></div>
-                    <h3 class="text-xl font-bold mb-3">עיבוד וייצור מתקדם</h3>
-                    <p class="text-gray-500 font-light text-sm">שימוש בטכנולוגיות חיתוך ועיבוד מהמתקדמות בעולם לרמת גימור אבסולוטית וללא פשרות.</p>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold">האם הדמיית ה-AI עולה כסף?</h3>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer text-gray-400 text-sm">
+                        לא. מערכת ההדמיה הטכנולוגית שלנו מוצעת ללא עלות כחלק מפגישת הייעוץ הראשונית, כדי להבטיח שתהיו שלמים ב-100% עם הבחירה שלכם לפני שיורדים לייצור.
+                    </div>
                 </div>
-                <div class="bg-white p-10 shadow-sm reveal" style="transition-delay: 200ms;">
-                    <div class="text-4xl mb-6 text-gray-800"><i class="fas fa-tools"></i></div>
-                    <h3 class="text-xl font-bold mb-3">התקנה מקצועית</h3>
-                    <p class="text-gray-500 font-light text-sm">צוות מתקינים מיומן ומנוסה הדואג להרכבה מדויקת, נקייה ובטוחה אצלכם בבית.</p>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold">עם אילו סוגי שיש אתם עובדים?</h3>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer text-gray-400 text-sm">
+                        אנו עובדים עם מיטב המותגים בארץ ובעולם, כולל אבן קיסר (Caesarstone), דקטון (Dekton), גרניט פורצלן, למינם (Laminam), וקוריאן. אנו נתאים את סוג החומר לתקציב ולאופי השימוש שלכם.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold">איך שומרים על משטח השיש לאורך זמן?</h3>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer text-gray-400 text-sm">
+                        התחזוקה תלויה בסוג המשטח שבחרתם. בגרניט פורצלן ודקטון ניתן להניח סירים חמים ישירות ולנקות עם חומרים חזקים. במשטחי קוורץ (כמו קיסר) מומלץ להשתמש בתחתיות לחום ולהימנע מחומרי ניקוי המכילים חומצות חזקות (כמו אנטי-קאלק). נספק לכם תדריך מלא בסיום ההתקנה.
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- TikTok Preview Section -->
-    <section class="tiktok-preview py-24 text-white relative z-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 reveal">
-                <div>
-                    <span class="text-[#00f2fe] uppercase tracking-widest text-sm font-semibold mb-2 flex items-center gap-2">
-                        <i class="fab fa-tiktok"></i> עקבו אחרינו
-                    </span>
-                    <h2 class="text-4xl md:text-5xl font-light">הצצה לעשייה שלנו.</h2>
-                </div>
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 border border-white text-white font-medium tracking-wide btn-outline hover:text-black hover:bg-white transition-all">
-                    לעמוד הטיקטוק הרשמי <i class="fab fa-tiktok mr-3"></i>
-                </a>
-            </div>
-
-            <!-- Mockup TikTok Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal" style="transition-delay: 100ms;">
-                <!-- Video 1 -->
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="group relative aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden block">
-                    <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7602.jpg" alt="TikTok Preview" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
-                        <span class="text-xs font-medium"><i class="fas fa-play text-white/80 mr-1"></i> 12.4K</span>
-                        <i class="fab fa-tiktok text-white/50 group-hover:text-[#00f2fe] transition-colors"></i>
-                    </div>
-                </a>
-                <!-- Video 2 -->
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="group relative aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden block mt-8">
-                    <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg" alt="TikTok Preview" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
-                        <span class="text-xs font-medium"><i class="fas fa-play text-white/80 mr-1"></i> 8.2K</span>
-                        <i class="fab fa-tiktok text-white/50 group-hover:text-[#00f2fe] transition-colors"></i>
-                    </div>
-                </a>
-                <!-- Video 3 -->
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="group relative aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden block">
-                    <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7604.jpg" alt="TikTok Preview" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
-                        <span class="text-xs font-medium"><i class="fas fa-play text-white/80 mr-1"></i> 15.1K</span>
-                        <i class="fab fa-tiktok text-white/50 group-hover:text-[#00f2fe] transition-colors"></i>
-                    </div>
-                </a>
-                <!-- Video 4 -->
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="group relative aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden block mt-8">
-                    <img src="https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7567.jpg" alt="TikTok Preview" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
-                        <span class="text-xs font-medium"><i class="fas fa-play text-white/80 mr-1"></i> 22.3K</span>
-                        <i class="fab fa-tiktok text-white/50 group-hover:text-[#00f2fe] transition-colors"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Full Contact & Details Section -->
-    <section id="contact" class="bg-black text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://m-marble.co.il/wp-content/uploads/2023/10/DSCF7580.jpg')] bg-cover bg-center opacity-10 grayscale"></div>
-        
-        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+    <section id="tiktok" class="py-32 bg-surface/30 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- TikTok Profile Mockup -->
+            <div class="max-w-4xl mx-auto bg-darkBg border border-white/10 rounded-3xl overflow-hidden shadow-2xl gsap-slide-up">
                 
-                <!-- Contact Details -->
-                <div class="reveal">
-                    <span class="text-gray-400 uppercase tracking-widest text-sm font-semibold mb-2 block">יצירת קשר</span>
-                    <h2 class="text-4xl md:text-6xl font-light mb-8">נשמח לעמוד<br>לשירותכם.</h2>
-                    <p class="text-gray-400 font-light text-lg mb-12">
-                        צוות היועצים שלנו ממתין לכם באולם התצוגה המרהיב שלנו, לעזור לכם לדייק את הצורך שלכם ולבחור את משטח החלומות למטבח שלכם.
-                    </p>
-
-                    <div class="space-y-8">
-                        <!-- Phone -->
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center shrink-0">
-                                <i class="fas fa-phone text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1">טלפון / נייד</h4>
-                                <div class="flex flex-col gap-1">
-                                    <a href="tel:048402101" class="text-gray-400 hover:text-white transition-colors font-light dir-ltr inline-block">04-8402101</a>
-                                    <a href="tel:0543034582" class="text-gray-400 hover:text-white transition-colors font-light dir-ltr inline-block">054-3034582</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Address -->
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center shrink-0">
-                                <i class="fas fa-map-marker-alt text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1">אולם התצוגה</h4>
-                                <p class="text-gray-400 font-light">היוזם 2, קרית ביאליק</p>
-                            </div>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center shrink-0">
-                                <i class="fas fa-envelope text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1">דוא"ל</h4>
-                                <a href="mailto:milenumarble@gmail.com" class="text-gray-400 hover:text-white transition-colors font-light font-sans">milenumarble@gmail.com</a>
-                            </div>
-                        </div>
+                <!-- Profile Header -->
+                <div class="p-8 border-b border-white/5 text-center flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full bg-primary mb-4 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(141,105,255,0.4)]">
+                        <i class="fa-solid fa-layer-group text-white"></i>
                     </div>
+                    <h2 class="text-2xl font-bold">Milenum Marble</h2>
+                    <p class="text-gray-400 text-sm mb-4">@milenummarble</p>
+                    
+                    <div class="flex gap-6 justify-center text-sm font-bold mb-6">
+                        <div class="text-center"><span class="block text-lg text-white">14.2K</span><span class="text-gray-500 font-normal">עוקבים</span></div>
+                        <div class="text-center"><span class="block text-lg text-white">280K</span><span class="text-gray-500 font-normal">לייקים</span></div>
+                        <div class="text-center"><span class="block text-lg text-white">152</span><span class="text-gray-500 font-normal">סרטונים</span></div>
+                    </div>
+
+                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="bg-[#fe2c55] hover:bg-[#e6284d] text-white px-10 py-2 rounded-md font-bold transition-colors">
+                        עקבו אחרינו בטיקטוק
+                    </a>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="bg-white/5 backdrop-blur-md p-8 md:p-12 border border-white/10 reveal" style="transition-delay: 100ms;">
-                    <h3 class="text-2xl font-bold mb-8">השאירו פרטים ונחזור אליכם</h3>
-                    <form onsubmit="event.preventDefault(); document.getElementById('success-msg').classList.remove('hidden'); this.reset();" class="space-y-6">
-                        <div>
-                            <input type="text" placeholder="שם מלא" required class="premium-input">
+                <!-- Video Grid -->
+                <div class="p-4 grid grid-cols-3 gap-2">
+                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a8e03?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
+                            <i class="fa-solid fa-play"></i> 120K
                         </div>
-                        <div>
-                            <input type="tel" placeholder="מספר טלפון" required class="premium-input text-right" dir="rtl">
+                    </a>
+                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
+                            <i class="fa-solid fa-play"></i> 89K
                         </div>
-                        <div>
-                            <input type="email" placeholder="דואר אלקטרוני" class="premium-input text-right" dir="rtl">
+                    </a>
+                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
+                            <i class="fa-solid fa-play"></i> 210K
                         </div>
-                        <div>
-                            <textarea placeholder="איך נוכל לעזור?" rows="3" class="premium-input resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full btn-outline border border-white text-white py-4 mt-4 uppercase tracking-wider font-medium hover:bg-white hover:text-black transition-colors">
-                            שלח פנייה
-                        </button>
-                        <p id="success-msg" class="hidden text-green-400 text-sm mt-4 text-center font-light">תודה רבה! פנייתך התקבלה ונחזור אליך בהקדם.</p>
-                    </form>
+                    </a>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-950 text-gray-400 py-16 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div class="col-span-1 md:col-span-2">
-                <img src="https://m-marble.co.il/wp-content/uploads/2023/08/cropped-logo.jpeg" alt="שיש מילניום" class="w-32 mb-6 logo-blend rounded bg-white p-2">
-                <p class="text-sm font-light max-w-sm mb-6 leading-relaxed">
-                    יבוא, יצוא, ייצור ושיווק של משטחי שיש מעוצבים. מעטפת משפחתית מרגע הבחירה ועד להתקנה, עם ניסיון של 3 דורות. אנו מתחייבים לאיכות וליוקרה ללא פשרות.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://wa.me/972543034582" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-            
+    <footer class="bg-[#0a0812] py-12 border-t border-white/5 text-center md:text-right">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 items-center">
             <div>
-                <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-sm">ניווט מהיר</h4>
-                <ul class="space-y-4 text-sm font-light">
-                    <li><a href="#home" class="hover:text-white transition-colors">בית</a></li>
-                    <li><a href="#about" class="hover:text-white transition-colors">אודותינו</a></li>
-                    <li><a href="#catalog" class="hover:text-white transition-colors">קטלוג מוצרים</a></li>
-                    <li><a href="#services" class="hover:text-white transition-colors">השירותים שלנו</a></li>
-                </ul>
+                <div class="text-2xl font-black mb-2"><i class="fa-solid fa-layer-group text-primary"></i> שיש מיליניום</div>
+                <p class="text-gray-500 text-sm">התקנת שיש למטבח בסטנדרט העתיד.</p>
             </div>
-            
-            <div>
-                <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-sm">מידע וצור קשר</h4>
-                <ul class="space-y-4 text-sm font-light">
-                    <li><a href="#contact" class="hover:text-white transition-colors">קביעת פגישת ייעוץ</a></li>
-                    <li>טלפון: <span class="dir-ltr">04-8402101</span> | <span class="dir-ltr">054-3034582</span></li>
-                    <li>דוא"ל: milenumarble@gmail.com</li>
-                    <li>כתובת: היוזם 2, קרית ביאליק</li>
-                </ul>
+            <div class="flex justify-center gap-6 text-2xl">
+                <a href="https://wa.me/972543034582" target="_blank" class="text-gray-400 hover:text-[#25d366] transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-tiktok"></i></a>
             </div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light text-gray-500">
-            <p>&copy; 2024 שיש מילניום. כל הזכויות שמורות.</p>
-            <div class="mt-4 md:mt-0 space-x-4 space-x-reverse">
-                <a href="#" class="hover:text-gray-300">תנאי שימוש</a>
-                <a href="#" class="hover:text-gray-300">הצהרת נגישות</a>
+            <div class="md:text-left text-gray-500 text-sm">
+                © 2026 שיש מיליניום. כל הזכויות שמורות.
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/972543034582" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/972543034582" class="whatsapp-float" target="_blank" aria-label="שלחו לנו הודעה בוואטסאפ">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- AI Chatbot Floating Button -->
-    <div id="ai-chat-btn" class="ai-float" aria-label="Chat with AI Assistant">
-        <i class="fas fa-sparkles text-xl"></i>
-    </div>
-
-    <!-- AI Chatbot Window -->
-    <div id="ai-chat-window" class="fixed bottom-24 right-6 lg:right-12 w-[350px] sm:w-[400px] h-[500px] max-h-[70vh] z-[101] glass-panel rounded-2xl flex flex-col overflow-hidden transition-all duration-500 opacity-0 pointer-events-none translate-y-10">
-        <!-- Chat Header -->
-        <div class="bg-gradient-to-r from-[#111] to-[#222] border-b border-white/10 p-5 flex justify-between items-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg width=20 height=20 xmlns=http://www.w3.org/2000/svg><circle cx=2 cy=2 r=1 fill=rgba(212,175,55,0.1)/></svg>')] opacity-50"></div>
-            <div class="flex items-center gap-3 relative z-10">
-                <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-500/50 flex items-center justify-center text-gold-500">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div>
-                    <h3 class="text-white font-medium text-lg">יועץ שיש וירטואלי</h3>
-                    <p class="text-gold-500 text-xs font-light tracking-wide">מבוסס בינה מלאכותית</p>
-                </div>
-            </div>
-            <button id="close-chat-btn" class="text-gray-400 hover:text-white transition-colors relative z-10 text-xl focus:outline-none">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <!-- Chat Messages -->
-        <div id="chat-messages" class="flex-1 p-5 overflow-y-auto flex flex-col gap-2 scroll-smooth">
-            <!-- Typing Indicator (Hidden by default) -->
-            <div id="typing-indicator" class="hidden justify-start mb-4">
-                <div class="bg-gray-800/80 border border-white/5 rounded-2xl rounded-tl-none p-4 flex gap-1 items-center">
-                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
-                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
-                    <div class="w-2 h-2 rounded-full bg-gold-500 chat-typing-dot"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Chat Input -->
-        <div class="p-4 bg-[#0a0a0a] border-t border-white/10">
-            <form id="chat-form" class="relative flex items-center">
-                <input type="text" id="chat-input" placeholder="שאל/י אותי על סוגי שיש..." class="w-full bg-white/5 border border-white/10 rounded-full py-3 pr-5 pl-12 text-white font-light text-sm focus:outline-none focus:border-gold-500/50 transition-colors placeholder:text-gray-500" autocomplete="off">
-                <button type="submit" class="absolute left-2 w-8 h-8 rounded-full bg-gold-500 text-black flex items-center justify-center hover:bg-gold-400 transition-colors focus:outline-none">
-                    <i class="fas fa-paper-plane text-xs"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Interactive Scripts -->
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navbar Scroll Effect
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('nav-scrolled');
-                    navbar.classList.remove('py-4');
-                    navbar.classList.add('py-2');
-                } else {
-                    navbar.classList.remove('nav-scrolled');
-                    navbar.classList.add('py-4');
-                    navbar.classList.remove('py-2');
-                }
-            });
-
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Mobile Menu Toggle
+            const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
 
-            const toggleMenu = () => {
-                mobileMenu.classList.toggle('translate-x-full');
-                document.body.classList.toggle('overflow-hidden');
-            };
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                } else {
+                    mobileMenu.classList.add('translate-x-full');
+                    menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                }
+            }
 
-            mobileMenuBtn.addEventListener('click', toggleMenu);
-            closeMenuBtn.addEventListener('click', toggleMenu);
+            menuBtn.addEventListener('click', toggleMenu);
             mobileLinks.forEach(link => {
-                link.addEventListener('click', toggleMenu);
-            });
-
-            // Scroll Reveal Animation (Intersection Observer)
-            const revealElements = document.querySelectorAll('.reveal');
-            
-            const revealCallback = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Run once
-                    }
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
                 });
-            };
-
-            const revealOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
-            
-            revealElements.forEach(el => {
-                revealObserver.observe(el);
             });
 
-            // ==========================================
-            // AI Chatbot Logic (Gemini API)
-            // ==========================================
-            const aiChatBtn = document.getElementById('ai-chat-btn');
-            const aiChatWindow = document.getElementById('ai-chat-window');
-            const closeChatBtn = document.getElementById('close-chat-btn');
-            const chatMessages = document.getElementById('chat-messages');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const typingIndicator = document.getElementById('typing-indicator');
-
-            let aiChatHistory = [];
-            const systemPrompt = "אתה יועץ וירטואלי מומחה, יוקרתי ואדיב מטעם 'שיש מילניום' - חברת בוטיק עם 3 דורות של ניסיון בייבוא, ייצור ושיווק משטחי שיש למטבחים ולאמבט. \nהחומרים שאתה מומחה בהם: פורצלן (עמיד מאוד, מראה מודרני), קוורץ (חזק, פרקטי), אבן טבעית (יוקרתי, קלאסי), ואוניקס. \nהסגנון שלך: שירותי, מקצועי, יוקרתי, משדר אמינות ואיכות. \nעליך לעזור לגולשים להבין איזה משטח מתאים לצרכים שלהם. \nבמידת הצורך, הזמן אותם בחום לאולם התצוגה המרהיב שלנו ברחוב היוזם 2, קרית ביאליק, או להשאיר פרטים בטופס שבאתר. \nהקפד על עברית תקינה, שפה עשירה אך נגישה, ותשובות קצרות וקולעות (עד 3 משפטים אלא אם התבקשת להרחיב). לעולם אל תמציא מחירים מדויקים.";
-
-            // Toggle Chat Window
-            aiChatBtn.addEventListener('click', () => {
-                const isOpen = !aiChatWindow.classList.contains('opacity-0');
-                if (isOpen) {
-                    closeChat();
-                } else {
-                    openChat();
-                }
+            // 2. Lottie Preloader
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-preloader'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://lottie.host/f51034b9-3a7f-4f34-a722-db02298c2c9a/Cfvivy5myD.json'
             });
 
-            closeChatBtn.addEventListener('click', closeChat);
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.transform = 'translateY(-100%)';
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.remove(), 800);
+            }, 1500);
 
-            function openChat() {
-                aiChatWindow.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
-                if(aiChatHistory.length === 0) {
-                    setTimeout(() => {
-                        addMessageToUI('system', 'ברוכים הבאים לשיש מילניום. ✦\nאני היועץ הווירטואלי האישי שלכם.\nאיך אוכל לסייע לכם בעיצוב מטבח החלומות היום?');
-                    }, 300);
-                }
-                chatInput.focus();
-            }
+            // 3. GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
 
-            function closeChat() {
-                aiChatWindow.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
-            }
-
-            // Handle Form Submission
-            chatForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const userText = chatInput.value.trim();
-                if(!userText) return;
-
-                addMessageToUI('user', userText);
-                chatInput.value = '';
-                
-                aiChatHistory.push({ role: 'user', parts: [{ text: userText }] });
-                
-                // Show typing indicator at the end
-                chatMessages.appendChild(typingIndicator);
-                typingIndicator.classList.remove('hidden');
-                typingIndicator.classList.add('flex');
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                try {
-                    const apiKey = ""; // API Key is automatically handled by the environment
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-                    const payload = {
-                        contents: aiChatHistory,
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    };
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if(!response.ok) throw new Error('API Error');
-
-                    const data = await response.json();
-                    const aiText = data.candidates[0].content.parts[0].text;
-                    
-                    aiChatHistory.push({ role: 'model', parts: [{ text: aiText }] });
-                    typingIndicator.classList.remove('flex');
-                    typingIndicator.classList.add('hidden');
-                    addMessageToUI('model', aiText);
-
-                } catch (error) {
-                    console.error("AI Chat Error:", error);
-                    typingIndicator.classList.remove('flex');
-                    typingIndicator.classList.add('hidden');
-                    addMessageToUI('system', 'מצטערים, חלה שגיאה בחיבור ליועץ. אנא נסו שוב מאוחר יותר או צרו קשר בטלפון.');
-                }
+            // Hero Text Reveal
+            gsap.from(".gsap-reveal", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                delay: 1.5,
+                ease: "power3.out"
             });
 
-            function addMessageToUI(sender, text) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `flex ${sender === 'user' ? 'justify-start' : 'justify-end'} mb-4 reveal active`;
-                
-                const bubble = document.createElement('div');
-                if (sender === 'user') {
-                    bubble.className = `max-w-[85%] rounded-2xl p-4 text-sm font-medium bg-gold-500 text-black rounded-tr-sm shadow-md`;
-                } else {
-                    bubble.className = `max-w-[85%] rounded-2xl p-4 text-sm font-light bg-gray-800/80 text-white border border-white/5 rounded-tl-sm shadow-lg leading-relaxed`;
-                }
-                
-                // format text basic newlines and asterisks for bold
-                let formattedText = text.replace(/\n/g, '<br>');
-                formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                bubble.innerHTML = formattedText;
-                
-                msgDiv.appendChild(bubble);
-                chatMessages.insertBefore(msgDiv, typingIndicator);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+            // Slide Up elements
+            gsap.utils.toArray('.gsap-slide-up').forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+
+            // Grid Stagger for multiple sections (Process, Articles, FAQ)
+            gsap.utils.toArray('.gsap-stagger').forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "back.out(1.7)"
+                });
+            });
         });
     </script>
 </body>
