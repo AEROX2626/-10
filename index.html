@@ -1,597 +1,391 @@
-
 <!DOCTYPE html>
-<html dir="rtl" lang="he-IL">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>שיש מיליניום | עיצוב מטבחים טכנולוגי</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>המקור | הדרכה בדרך לתשובה</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Heebo', 'sans-serif'] },
-                    colors: {
-                        darkBg: '#0f0c1b',
-                        primary: '#8D69FF',
-                        primaryDark: '#5a3bb8',
-                        surface: '#1a162b',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        body {
-            background-color: #0f0c1b;
-            color: #ececec;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        /* הגדרות בסיס ומשתנים - סגנון הייטקי */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --primary: #0ea5e9;
+            --secondary: #3b82f6;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --whatsapp: #25D366;
+            --ai-glow: #8b5cf6;
         }
 
-        /* Preloader */
-        #preloader {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* רקע עם זוהר טכנולוגי */
+        .glow-bg {
             position: fixed;
-            inset: 0;
-            background-color: #0f0c1b;
+            top: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(15,23,42,0) 70%);
+            z-index: -1;
+        }
+
+        /* ניווט */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to left, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* אזור ראשי - Hero */
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* כפתורים */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+        }
+
+        /* אזור זמני היום */
+        .zmanim-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .zmanim-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 99999;
-            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            margin: 0 auto;
+            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.15));
+            transition: transform 0.3s ease;
         }
 
-        /* Glowing Text */
-        .glow-text {
-            text-shadow: 0 0 20px rgba(141, 105, 255, 0.5);
+        .zmanim-wrapper:hover {
+            transform: translateY(-5px);
         }
 
-        /* Custom AI Scanner Effect */
-        .ai-scanner-box {
-            position: relative;
+        /* אזור הדרכה */
+        .guide-section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+        }
+
+        /* אזור הרב AI */
+        .ai-section {
+            padding: 80px 5%;
+            background: linear-gradient(to bottom, rgba(15,23,42,0) 0%, rgba(139, 92, 246, 0.05) 100%);
+            text-align: center;
+        }
+
+        .ai-title span {
+            background: linear-gradient(to left, #c084fc, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .iframe-container {
+            max-width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(141, 105, 255, 0.3);
-            border-radius: 1rem;
-            background: linear-gradient(145deg, #1a162b 0%, #0f0c1b 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+            background: var(--bg-card);
+            position: relative;
         }
-        
-        .ai-scan-line {
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
-            background: #8D69FF;
-            box-shadow: 0 0 15px #8D69FF, 0 0 30px #8D69FF;
-            animation: scan 3s infinite linear;
         }
 
-        @keyframes scan {
-            0% { top: 0; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
+        /* אזור וואטסאפ - יצירת קשר עם רקע ירושלים */
+        .whatsapp-section {
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.95)), url('https://images.unsplash.com/photo-1544256708-11ea6364ee81?auto=format&fit=crop&w=1920&q=80');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 100px 20px;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 0px 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 100;
-            display: flex;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20b858;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* כפתור וואטסאפ צף */
+        .floating-wa {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--whatsapp);
+            color: white;
             width: 60px;
             height: 60px;
-            transition: all 0.3s ease;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            transition: transform 0.3s;
+            text-decoration: none;
         }
 
-        .whatsapp-float:hover {
+        .floating-wa:hover {
             transform: scale(1.1);
-            box-shadow: 0px 6px 20px rgba(37, 211, 102, 0.6);
-            color: #fff;
         }
 
-        /* Custom Button */
-        .btn-primary {
-            background: linear-gradient(135deg, #8D69FF 0%, #5a3bb8 100%);
-            box-shadow: 0 10px 20px -10px rgba(141, 105, 255, 0.6);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -10px rgba(141, 105, 255, 0.8);
+        /* פוטר */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background-color: var(--bg-dark);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f0c1b; }
-        ::-webkit-scrollbar-thumb { background: #8D69FF; border-radius: 10px; }
-
-        /* FAQ Accordion */
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .faq-item.active .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        /* Mobile Menu */
-        #mobile-menu {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* רספונסיביות לטלפונים */
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .guide-section { padding: 40px 20px; }
+            .iframe-container { height: 500px; }
         }
     </style>
 </head>
-<body class="antialiased selection:bg-primary selection:text-white">
+<body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="lottie-preloader" style="width: 200px; height: 200px;"></div>
-    </div>
+    <div class="glow-bg"></div>
 
-    <!-- Header -->
-    <header class="fixed w-full top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="text-2xl font-black tracking-tight flex items-center gap-2 z-50">
-                <i class="fa-solid fa-layer-group text-primary"></i>
-                שיש מיליניום
-            </div>
-            
-            <!-- Desktop Nav -->
-            <nav class="hidden lg:flex gap-8 text-sm font-bold">
-                <a href="#home" class="hover:text-primary transition-colors">בית</a>
-                <a href="#process" class="hover:text-primary transition-colors">התהליך</a>
-                <a href="#articles" class="hover:text-primary transition-colors">מדריך לבחירה</a>
-                <a href="#ai-feature" class="hover:text-primary transition-colors">AI Vision</a>
-                <a href="#faq" class="hover:text-primary transition-colors">שאלות נפוצות</a>
-                <a href="#tiktok" class="hover:text-primary transition-colors">טיקטוק</a>
-            </nav>
-            
-            <div class="hidden lg:block">
-                <a href="https://wa.me/972543034582" target="_blank" class="btn-primary px-6 py-2 rounded-full font-bold text-sm">
-                    לקביעת פגישה
-                </a>
-            </div>
-
-            <!-- Mobile Hamburger Button -->
-            <button id="menu-btn" class="lg:hidden text-2xl text-white z-50 focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+    <nav>
+        <div class="logo">המקור.</div>
+        <div class="nav-links">
+            <a href="#home">ראשי</a>
+            <a href="#zmanim">זמני היום</a>
+            <a href="#guide">הדרכה</a>
+            <a href="#ai-rabbi">הרב AI</a>
+            <a href="#contact">שאל את הרב</a>
         </div>
+    </nav>
+
+    <header id="home">
+        <h1>לחזור הביתה, <br><span>בקצב שלך.</span></h1>
+        <p class="subtitle">מסע של תשובה לא חייב להיות מבלבל. קבל הדרכה מסודרת, מענה לשאלות באמונה והלכה, וחיבור אמיתי לשורשים שלך - בעידן החדש.</p>
+        <a href="#guide" class="btn btn-primary">התחל כאן</a>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-darkBg/95 backdrop-blur-xl z-40 transform translate-x-full flex flex-col items-center justify-center pt-20">
-        <nav class="flex flex-col gap-6 text-2xl font-bold text-center">
-            <a href="#home" class="mobile-link hover:text-primary transition-colors">בית</a>
-            <a href="#process" class="mobile-link hover:text-primary transition-colors">התהליך שלנו</a>
-            <a href="#articles" class="mobile-link hover:text-primary transition-colors">מדריך לבחירת שיש</a>
-            <a href="#ai-feature" class="mobile-link hover:text-primary transition-colors">טכנולוגיית AI</a>
-            <a href="#faq" class="mobile-link hover:text-primary transition-colors">שאלות נפוצות</a>
-            <a href="#tiktok" class="mobile-link hover:text-primary transition-colors">הפרויקטים שלנו</a>
-            <a href="https://wa.me/972543034582" target="_blank" class="btn-primary px-8 py-3 rounded-full font-bold text-lg mt-6 inline-block">
-                דברו איתנו בוואטסאפ
-            </a>
-        </nav>
-    </div>
+    <section id="zmanim" class="zmanim-section">
+        <h2 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 700;">זמני היום בירושלים <i class="fas fa-clock" style="color: var(--primary); margin-right: 5px;"></i></h2>
+        <div class="zmanim-wrapper">
+            <iframe id="zmanim-jerusalem" src="https://zmanim.cc/widget/embed?city=jerusalem&theme=auto&size=md&zmanim=sunrise%2Csof-zman-shma-gra%2Cchatzot%2Cmincha-gedola%2Csunset%2Ctzeit-hakochavim" width="340" height="296" frameborder="0" scrolling="no" style="border:0;border-radius:16px;width:100%;max-width:340px;display:block" title="זמני ירושלים" loading="lazy"></iframe>
+            <script>(function(){var f=document.getElementById('zmanim-jerusalem');window.addEventListener('message',function(e){if(e&&e.data&&e.data.type==='zmanim:resize'&&e.data.city==="jerusalem"&&f){f.style.height=e.data.height+'px';}});})();</script>
+        </div>
+    </section>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] -z-10"></div>
+    <section id="guide" class="guide-section">
+        <h2 class="section-title">איך מתחילים? הדרכה מעשית</h2>
+        <div class="cards-container">
+            <div class="card">
+                <i class="fas fa-book-open"></i>
+                <h3>אמונה ותודעה</h3>
+                <p>הבסיס לכל התהליך. שיעורים, מאמרים והדרכות קצרות שמחברות את השכל והלב אל המקור האלוהי.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-praying-hands"></i>
+                <h3>תפילה והודיה</h3>
+                <p>איך מדברים עם השם? הדרכה שלב אחר שלב על ברכות השחר, תפילת עמידה, והתבודדות אישית.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-star-of-david"></i>
+                <h3>שבת וכשרות</h3>
+                <p>הכנסת הקדושה הביתה. מדריך פרקטי לשמירת שבת ראשונה ולשמירה על מטבח כשר, צעד אחר צעד.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-rabbi" class="ai-section">
+        <h2 class="section-title ai-title">תשובות מיידיות עם <span>הרב AI</span></h2>
+        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
+            מנוע בינה מלאכותית מתקדם שעבר אימון על מקורות ההלכה והיהדות. שאל כל שאלה וקבל הדרכה מיידית. 
+            <br><small>(לשאלות הלכתיות מורכבות או אישיות, מומלץ תמיד להתייעץ עם רב אנושי בוואטסאפ למטה).</small>
+        </p>
         
-        <div class="max-w-7xl mx-auto px-6 text-center z-10">
-            <h1 class="gsap-reveal text-5xl md:text-8xl font-black mb-6 leading-tight">
-                האומנות של הטבע.<br>
-                <span class="text-primary glow-text">הדיוק של המחר.</span>
-            </h1>
-            <p class="gsap-reveal text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                חברת שיש מיליניום מביאה את מהפכת הטכנולוגיה לעיצוב המטבח שלכם. ייצור והתקנת משטחי שיש בסטנדרט חסר פשרות.
-            </p>
-            <div class="gsap-reveal flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#ai-feature" class="btn-primary px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 w-full sm:w-auto justify-center">
-                    <i class="fa-solid fa-microchip"></i> נסו את מערכת ה-AI
-                </a>
-                <a href="#process" class="border border-white/20 hover:border-primary hover:text-primary px-8 py-4 rounded-full font-bold text-lg transition-all w-full sm:w-auto justify-center">
-                    איך זה עובד?
-                </a>
-            </div>
+        <div class="iframe-container">
+            <iframe src="https://widget.rabbiai.app/he/chat/rabbi?display-mode=auto" title="Rabbi AI Chat"></iframe>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section id="process" class="py-32 bg-surface/30 border-y border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20 gsap-slide-up">
-                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block">שלב אחרי שלב</span>
-                <h2 class="text-4xl md:text-5xl font-black mb-4">הדרך למטבח המושלם</h2>
-                <p class="text-gray-400 text-lg">תהליך העבודה שלנו משלב מומחיות מסורתית עם טכנולוגיה מתקדמת.</p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8 relative">
-                <!-- Connecting Line (Desktop) -->
-                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-l from-transparent via-primary to-transparent -translate-y-1/2 z-0"></div>
-
-                <!-- Step 1 -->
-                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors">
-                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">1</div>
-                    <h3 class="text-xl font-bold mb-3">פגישת אפיון ומדידה</h3>
-                    <p class="text-sm text-gray-400">נפגשים במטבח שלכם, מבינים את הצרכים, ומבצעים מדידות מדויקות בלייזר.</p>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors mt-0 md:mt-12">
-                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">2</div>
-                    <h3 class="text-xl font-bold mb-3">הדמיית AI</h3>
-                    <p class="text-sm text-gray-400">משתמשים במערכת ה-Vision שלנו כדי לראות בדיוק איך השיש יראה במטבח שלכם טרם החיתוך.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors">
-                    <div class="w-16 h-16 bg-surface border border-primary rounded-full flex items-center justify-center text-2xl text-primary mx-auto mb-6 shadow-[0_0_15px_rgba(141,105,255,0.3)]">3</div>
-                    <h3 class="text-xl font-bold mb-3">ייצור ו-CNC</h3>
-                    <p class="text-sm text-gray-400">חיתוך מדויק ברמת המילימטר במפעל הטכנולוגי שלנו, ליצירת גימורים מושלמים.</p>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="gsap-stagger relative z-10 bg-darkBg border border-white/10 p-8 rounded-2xl text-center hover:border-primary/50 transition-colors mt-0 md:mt-12">
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl text-white mx-auto mb-6 shadow-[0_0_20px_rgba(141,105,255,0.6)]">4</div>
-                    <h3 class="text-xl font-bold mb-3">התקנה חכמה</h3>
-                    <p class="text-sm text-gray-400">צוות המתקינים המומחים שלנו מגיע ליום עבודה מרוכז, נקי ומהיר. תתחדשו!</p>
-                </div>
-            </div>
-        </div>
+    <section id="contact" class="whatsapp-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">נתקלת בשאלה מורכבת?</h2>
+        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
+            יש דברים שדורשים מגע אנושי והכרות אישית. שלח הודעה וקבל מענה מכיל ומדויק על פי ההלכה.
+        </p>
+        <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מהאתר%20ויש%20לי%20שאלה%20בנושא:" target="_blank" class="btn btn-whatsapp btn">
+            <i class="fab fa-whatsapp"></i> שלח הודעה לרב עכשיו
+        </a>
     </section>
 
-    <!-- Articles / Info Section -->
-    <section id="articles" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gsap-slide-up">
-                <div class="max-w-2xl">
-                    <h2 class="text-4xl md:text-5xl font-black mb-4">איך לבחור שיש למטבח?</h2>
-                    <p class="text-gray-400 text-lg">גרניט, קוורץ או פורצלן? אספנו עבורכם את כל המידע שצריך לדעת לפני שמקבלים החלטה על משטח העבודה שלכם.</p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
-                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
-                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">גרניט פורצלן מול קוורץ</h3>
-                        <p class="text-gray-400 text-sm mb-4">
-                            פורצלן מציע עמידות חסרת פשרות לחום ושריטות, בעוד קוורץ (כמו אבן קיסר) מעניק גמישות עיצובית ומראה אחיד. מה מתאים לסגנון הבישול שלכם?
-                        </p>
-                        <span class="text-primary text-sm font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-book-open"></i> חומרים
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
-                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
-                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">תחזוקה וניקיון שוטף</h3>
-                        <p class="text-gray-400 text-sm mb-4">
-                            סוד הקסם בשיש איכותי הוא רמת הספיגה שלו. גלו אילו משטחים דורשים מינימום תחזוקה, עמידים בפני כתמי כורכום ויין, וקלים לניקוי יומיומי.
-                        </p>
-                        <span class="text-primary text-sm font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-sparkles"></i> תחזוקה
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group gsap-stagger">
-                    <div class="h-48 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center overflow-hidden">
-                        <div class="w-full h-full bg-black/40 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">התאמת צבעים ותאורה</h3>
-                        <p class="text-gray-400 text-sm mb-4">
-                            שיש כהה למראה דרמטי או שיש בהיר עם עורקים לפתיחת המרחב? איך תאורת המטבח (טבעית ומלאכותית) משפיעה על הגוון הסופי של המשטח.
-                        </p>
-                        <span class="text-primary text-sm font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-palette"></i> עיצוב
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Feature Section -->
-    <section id="ai-feature" class="py-32 bg-surface/50 border-y border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            <div class="gsap-slide-up">
-                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block">Millennium AI-Vision™</span>
-                <h2 class="text-4xl md:text-5xl font-black mb-6">לראות את המטבח שלכם <br>באור חדש לגמרי.</h2>
-                <p class="text-gray-400 text-lg mb-8">
-                    אל תנחשו איך השיש יראה. באמצעות מערכת הבינה המלאכותית המתקדמת שלנו, פשוט צלמו את המטבח הקיים שלכם, בחרו דגם שיש, וה-AI שלנו ייצר עבורכם הדמיה פוטו-ריאליסטית מדויקת בתוך שניות.
-                </p>
-                <ul class="space-y-4 mb-8">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> התאמה מושלמת לתאורה הטבעית במטבח.</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> זיהוי חכם של כיורים וכיריים.</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-primary"></i> השוואת עשרות דגמי שיש בקליק אחד.</li>
-                </ul>
-            </div>
-
-            <div class="gsap-slide-up ai-scanner-box h-[500px] p-8 flex flex-col justify-between">
-                <div class="ai-scan-line"></div>
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex gap-2">
-                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <div class="text-xs text-gray-500 font-mono">Millennium-AI Engine v2.4</div>
-                </div>
-                
-                <div class="flex-1 border-2 border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center text-center p-6 bg-black/20 backdrop-blur-sm relative overflow-hidden group">
-                    <i class="fa-solid fa-camera text-4xl text-gray-500 mb-4 group-hover:text-primary transition-colors"></i>
-                    <h3 class="text-xl font-bold mb-2">העלו תמונה של המטבח</h3>
-                    <p class="text-sm text-gray-400">גררו תמונה לכאן או לחצו לבחירה</p>
-                </div>
-
-                <div class="mt-6 flex gap-3 overflow-x-hidden">
-                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-primary cursor-pointer"></div>
-                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-transparent opacity-50 cursor-pointer"></div>
-                    <div class="h-16 w-16 rounded-md bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=100&q=80')] bg-cover border-2 border-transparent opacity-50 cursor-pointer"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-32 relative">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16 gsap-slide-up">
-                <h2 class="text-4xl font-black mb-4">שאלות נפוצות</h2>
-                <p class="text-gray-400">כל מה שצריך לדעת לפני שיוצאים לדרך.</p>
-            </div>
-
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-bold">תוך כמה זמן מתבצעת ההתקנה?</h3>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="faq-answer text-gray-400 text-sm">
-                        מרגע ביצוע המדידה הסופית במטבח שלכם, הייצור והחיתוך במפעל לוקחים עד 7 ימי עסקים. לאחר מכן, נתאם יום התקנה מרוכז שבו צוות המומחים שלנו ירכיב את השיש בצורה מושלמת.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-bold">האם הדמיית ה-AI עולה כסף?</h3>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="faq-answer text-gray-400 text-sm">
-                        לא. מערכת ההדמיה הטכנולוגית שלנו מוצעת ללא עלות כחלק מפגישת הייעוץ הראשונית, כדי להבטיח שתהיו שלמים ב-100% עם הבחירה שלכם לפני שיורדים לייצור.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-bold">עם אילו סוגי שיש אתם עובדים?</h3>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="faq-answer text-gray-400 text-sm">
-                        אנו עובדים עם מיטב המותגים בארץ ובעולם, כולל אבן קיסר (Caesarstone), דקטון (Dekton), גרניט פורצלן, למינם (Laminam), וקוריאן. אנו נתאים את סוג החומר לתקציב ולאופי השימוש שלכם.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 4 -->
-                <div class="faq-item bg-surface border border-white/5 rounded-xl px-6 py-4 cursor-pointer hover:border-primary/30 transition-colors gsap-stagger" onclick="this.classList.toggle('active')">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-bold">איך שומרים על משטח השיש לאורך זמן?</h3>
-                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="faq-answer text-gray-400 text-sm">
-                        התחזוקה תלויה בסוג המשטח שבחרתם. בגרניט פורצלן ודקטון ניתן להניח סירים חמים ישירות ולנקות עם חומרים חזקים. במשטחי קוורץ (כמו קיסר) מומלץ להשתמש בתחתיות לחום ולהימנע מחומרי ניקוי המכילים חומצות חזקות (כמו אנטי-קאלק). נספק לכם תדריך מלא בסיום ההתקנה.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TikTok Preview Section -->
-    <section id="tiktok" class="py-32 bg-surface/30 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            
-            <!-- TikTok Profile Mockup -->
-            <div class="max-w-4xl mx-auto bg-darkBg border border-white/10 rounded-3xl overflow-hidden shadow-2xl gsap-slide-up">
-                
-                <!-- Profile Header -->
-                <div class="p-8 border-b border-white/5 text-center flex flex-col items-center">
-                    <div class="w-24 h-24 rounded-full bg-primary mb-4 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(141,105,255,0.4)]">
-                        <i class="fa-solid fa-layer-group text-white"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold">Milenum Marble</h2>
-                    <p class="text-gray-400 text-sm mb-4">@milenummarble</p>
-                    
-                    <div class="flex gap-6 justify-center text-sm font-bold mb-6">
-                        <div class="text-center"><span class="block text-lg text-white">14.2K</span><span class="text-gray-500 font-normal">עוקבים</span></div>
-                        <div class="text-center"><span class="block text-lg text-white">280K</span><span class="text-gray-500 font-normal">לייקים</span></div>
-                        <div class="text-center"><span class="block text-lg text-white">152</span><span class="text-gray-500 font-normal">סרטונים</span></div>
-                    </div>
-
-                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="bg-[#fe2c55] hover:bg-[#e6284d] text-white px-10 py-2 rounded-md font-bold transition-colors">
-                        עקבו אחרינו בטיקטוק
-                    </a>
-                </div>
-
-                <!-- Video Grid -->
-                <div class="p-4 grid grid-cols-3 gap-2">
-                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a8e03?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
-                            <i class="fa-solid fa-play"></i> 120K
-                        </div>
-                    </a>
-                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
-                            <i class="fa-solid fa-play"></i> 89K
-                        </div>
-                    </a>
-                    <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="aspect-[9/16] bg-surface relative group overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=300&q=80" alt="TikTok Video" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs font-bold bg-black/50 px-2 py-1 rounded">
-                            <i class="fa-solid fa-play"></i> 210K
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#0a0812] py-12 border-t border-white/5 text-center md:text-right">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 items-center">
-            <div>
-                <div class="text-2xl font-black mb-2"><i class="fa-solid fa-layer-group text-primary"></i> שיש מיליניום</div>
-                <p class="text-gray-500 text-sm">התקנת שיש למטבח בסטנדרט העתיד.</p>
-            </div>
-            <div class="flex justify-center gap-6 text-2xl">
-                <a href="https://wa.me/972543034582" target="_blank" class="text-gray-400 hover:text-[#25d366] transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://www.tiktok.com/@milenummarble" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-tiktok"></i></a>
-            </div>
-            <div class="md:text-left text-gray-500 text-sm">
-                © 2026 שיש מיליניום. כל הזכויות שמורות.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/972543034582" class="whatsapp-float" target="_blank" aria-label="שלחו לנו הודעה בוואטסאפ">
-        <i class="fa-brands fa-whatsapp"></i>
+    <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מהאתר%20ויש%20לי%20שאלה%20בנושא:" target="_blank" class="floating-wa" title="שאלות בהלכה?">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // 1. Mobile Menu Toggle
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            let isMenuOpen = false;
+    <footer>
+        <p>&copy; 2026 המקור - פלטפורמה טכנולוגית ליהדות מחברת. כל הזכויות שמורות.</p>
+    </footer>
 
-            function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('translate-x-full');
-                    menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                } else {
-                    mobileMenu.classList.add('translate-x-full');
-                    menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-                    document.body.style.overflow = 'auto';
-                }
-            }
-
-            menuBtn.addEventListener('click', toggleMenu);
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (isMenuOpen) toggleMenu();
-                });
-            });
-
-            // 2. Lottie Preloader
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-preloader'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'https://lottie.host/f51034b9-3a7f-4f34-a722-db02298c2c9a/Cfvivy5myD.json'
-            });
-
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                preloader.style.transform = 'translateY(-100%)';
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.remove(), 800);
-            }, 1500);
-
-            // 3. GSAP Animations
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Hero Text Reveal
-            gsap.from(".gsap-reveal", {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                delay: 1.5,
-                ease: "power3.out"
-            });
-
-            // Slide Up elements
-            gsap.utils.toArray('.gsap-slide-up').forEach(element => {
-                gsap.from(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power2.out"
-                });
-            });
-
-            // Grid Stagger for multiple sections (Process, Articles, FAQ)
-            gsap.utils.toArray('.gsap-stagger').forEach(element => {
-                gsap.from(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                    },
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.6,
-                    ease: "back.out(1.7)"
-                });
-            });
-        });
-    </script>
 </body>
 </html>
