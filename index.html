@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>המקור | הדרכה בדרך לתשובה</title>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>צעדים | הבית לתשובה ולדרך חדשה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* הגדרות בסיס ומשתנים - סגנון הייטקי */
+        /* הגדרות בסיס - עיצוב נגיש, בהיר ומזמין */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --primary: #0ea5e9;
-            --secondary: #3b82f6;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-main: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --bg-soft: #F0F4F8;
+            --primary: #1E3A8A; /* כחול עמוק - משדר אמינות ומסורת */
+            --secondary: #D97706; /* זהב/חול - משדר חום ואור */
+            --text-dark: #1E293B;
+            --text-muted: #475569;
             --whatsapp: #25D366;
-            --ai-glow: #8b5cf6;
+            --border-radius: 16px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -28,21 +31,10 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.7;
             overflow-x: hidden;
-        }
-
-        /* רקע עם זוהר טכנולוגי */
-        .glow-bg {
-            position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(15,23,42,0) 70%);
-            z-index: -1;
         }
 
         /* ניווט */
@@ -50,71 +42,90 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            z-index: 1000;
         }
 
         .logo {
             font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(to left, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--text-dark);
             text-decoration: none;
-            margin-right: 20px;
-            font-weight: 400;
+            font-weight: 600;
+            font-size: 1.05rem;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
             color: var(--primary);
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         /* אזור ראשי - Hero */
         header {
             text-align: center;
-            padding: 80px 20px 60px;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #E0E7FF 0%, #FAFAFA 100%);
+            border-bottom: 1px solid #E2E8F0;
         }
 
         h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            font-weight: 900;
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 15px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
         }
 
         h1 span {
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 40px;
+            max-width: 700px;
+            margin: 0 auto 35px;
         }
 
         /* כפתורים */
         .btn {
-            display: inline-block;
-            padding: 15px 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             border: none;
@@ -122,20 +133,59 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             color: white;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+            background: #152C6B;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* פינת חיזוק יומי */
+        .daily-chizuk {
+            background: var(--bg-card);
+            max-width: 800px;
+            margin: -30px auto 40px;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .daily-chizuk i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .daily-chizuk p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* אזורים כלליים */
+        section {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-weight: 800;
         }
 
         /* אזור זמני היום */
         .zmanim-section {
-            padding: 40px 20px;
-            text-align: center;
+            background-color: var(--bg-soft);
         }
         
         .zmanim-wrapper {
@@ -143,28 +193,12 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto;
-            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.15));
-            transition: transform 0.3s ease;
-        }
-
-        .zmanim-wrapper:hover {
-            transform: translateY(-5px);
         }
 
         /* אזור הדרכה */
-        .guide-section {
-            padding: 80px 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -172,58 +206,80 @@
 
         .card {
             background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #E2E8F0;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
         }
 
         .card i {
-            font-size: 3rem;
-            color: var(--primary);
+            font-size: 2.5rem;
+            color: var(--secondary);
             margin-bottom: 20px;
+            background: #FEF3C7;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            color: var(--primary);
         }
 
-        .card p {
+        /* מושגי יסוד - מילון */
+        .dictionary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .term-box {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .term-box h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .term-box p {
+            font-size: 0.95rem;
             color: var(--text-muted);
         }
 
         /* אזור הרב AI */
         .ai-section {
-            padding: 80px 5%;
-            background: linear-gradient(to bottom, rgba(15,23,42,0) 0%, rgba(139, 92, 246, 0.05) 100%);
-            text-align: center;
-        }
-
-        .ai-title span {
-            background: linear-gradient(to left, #c084fc, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: var(--bg-soft);
         }
 
         .iframe-container {
             max-width: 800px;
             height: 600px;
             margin: 0 auto;
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+            box-shadow: var(--shadow-md);
             background: var(--bg-card);
             position: relative;
+            border: 2px solid #E2E8F0;
         }
 
         .iframe-container iframe {
@@ -235,51 +291,39 @@
             left: 0;
         }
 
-        /* אזור וואטסאפ - יצירת קשר עם רקע ירושלים */
+        /* אזור וואטסאפ */
         .whatsapp-section {
-            background-color: var(--bg-dark);
-            background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.95)), url('https://images.unsplash.com/photo-1544256708-11ea6364ee81?auto=format&fit=crop&w=1920&q=80');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            padding: 100px 20px;
+            background-color: #E0E7FF;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 20px;
         }
 
         .btn-whatsapp {
             background-color: var(--whatsapp);
             color: white;
             font-size: 1.2rem;
-            padding: 15px 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
 
         .btn-whatsapp:hover {
             background-color: #20b858;
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
         }
 
         /* כפתור וואטסאפ צף */
         .floating-wa {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 25px;
+            left: 25px;
             background-color: var(--whatsapp);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            font-size: 2.2rem;
+            box-shadow: var(--shadow-md);
             z-index: 1000;
             transition: transform 0.3s;
             text-decoration: none;
@@ -292,100 +336,176 @@
         /* פוטר */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            background-color: var(--bg-dark);
+            font-size: 0.95rem;
+            background-color: var(--bg-card);
+            border-top: 1px solid #E2E8F0;
         }
 
-        /* רספונסיביות לטלפונים */
+        /* רספונסיביות למובייל */
         @media(max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            .guide-section { padding: 40px 20px; }
-            .iframe-container { height: 500px; }
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                display: none; /* יופעל בעזרת JS */
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .daily-chizuk {
+                margin: -20px 15px 30px;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .iframe-container {
+                height: 500px;
+            }
+            
+            .floating-wa {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
-
     <nav>
-        <div class="logo">המקור.</div>
-        <div class="nav-links">
-            <a href="#home">ראשי</a>
-            <a href="#zmanim">זמני היום</a>
-            <a href="#guide">הדרכה</a>
-            <a href="#ai-rabbi">הרב AI</a>
-            <a href="#contact">שאל את הרב</a>
+        <div class="logo"><i class="fas fa-shoe-prints"></i> צעדים.</div>
+        <button class="menu-toggle" aria-label="פתח תפריט" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#home" onclick="toggleMenu()">ראשי</a>
+            <a href="#zmanim" onclick="toggleMenu()">זמני היום</a>
+            <a href="#guide" onclick="toggleMenu()">הדרכה</a>
+            <a href="#dictionary" onclick="toggleMenu()">מושגי יסוד</a>
+            <a href="#ai-rabbi" onclick="toggleMenu()">הרב AI</a>
+            <a href="#contact" onclick="toggleMenu()">שאל את הרב</a>
         </div>
     </nav>
 
     <header id="home">
         <h1>לחזור הביתה, <br><span>בקצב שלך.</span></h1>
-        <p class="subtitle">מסע של תשובה לא חייב להיות מבלבל. קבל הדרכה מסודרת, מענה לשאלות באמונה והלכה, וחיבור אמיתי לשורשים שלך - בעידן החדש.</p>
-        <a href="#guide" class="btn btn-primary">התחל כאן</a>
+        <p class="subtitle">מסע של תשובה לא חייב להיות מבלבל. קבל הדרכה מסודרת, מענה לשאלות באמונה והלכה, וחיבור אמיתי לשורשים שלך - בשפה שאתה מבין.</p>
+        <a href="#guide" class="btn btn-primary">התחל כאן <i class="fas fa-arrow-left"></i></a>
     </header>
 
+    <div class="daily-chizuk">
+        <i class="fas fa-quote-right"></i>
+        <p>"כל רגע שבו אדם בוחר בטוב, הוא בורא עולם חדש."</p>
+        <span style="font-size: 0.9rem; color: var(--text-muted);">חיזוק יומי</span>
+    </div>
+
     <section id="zmanim" class="zmanim-section">
-        <h2 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 700;">זמני היום בירושלים <i class="fas fa-clock" style="color: var(--primary); margin-right: 5px;"></i></h2>
+        <h2 class="section-title">זמני היום <i class="fas fa-clock" style="color: var(--secondary); font-size: 1.5rem; margin-right: 5px;"></i></h2>
         <div class="zmanim-wrapper">
-            <iframe id="zmanim-jerusalem" src="https://zmanim.cc/widget/embed?city=jerusalem&theme=auto&size=md&zmanim=sunrise%2Csof-zman-shma-gra%2Cchatzot%2Cmincha-gedola%2Csunset%2Ctzeit-hakochavim" width="340" height="296" frameborder="0" scrolling="no" style="border:0;border-radius:16px;width:100%;max-width:340px;display:block" title="זמני ירושלים" loading="lazy"></iframe>
+            <iframe id="zmanim-jerusalem" src="https://zmanim.cc/widget/embed?city=jerusalem&theme=auto&size=md&zmanim=sunrise%2Csof-zman-shma-mga%2Csof-zman-shma-gra%2Csof-zman-tfilla%2Cchatzot%2Cmincha-gedola%2Cmincha-ketana%2Cplag-hamincha%2Csunset%2Ctzeit-hakochavim%2Crabbeinu-tam" width="340" height="436" frameborder="0" scrolling="no" style="border:0;border-radius:16px;width:100%;max-width:340px;display:block" title="זמני ירושלים" loading="lazy"></iframe>
             <script>(function(){var f=document.getElementById('zmanim-jerusalem');window.addEventListener('message',function(e){if(e&&e.data&&e.data.type==='zmanim:resize'&&e.data.city==="jerusalem"&&f){f.style.height=e.data.height+'px';}});})();</script>
         </div>
     </section>
 
-    <section id="guide" class="guide-section">
+    <section id="guide">
         <h2 class="section-title">איך מתחילים? הדרכה מעשית</h2>
         <div class="cards-container">
             <div class="card">
                 <i class="fas fa-book-open"></i>
                 <h3>אמונה ותודעה</h3>
-                <p>הבסיס לכל התהליך. שיעורים, מאמרים והדרכות קצרות שמחברות את השכל והלב אל המקור האלוהי.</p>
+                <p>הבסיס לכל התהליך. שיעורים, מאמרים והדרכות קצרות שמחברות את השכל והלב אל המקור האלוהי בקצב הנכון עבורך.</p>
             </div>
             <div class="card">
                 <i class="fas fa-praying-hands"></i>
                 <h3>תפילה והודיה</h3>
-                <p>איך מדברים עם השם? הדרכה שלב אחר שלב על ברכות השחר, תפילת עמידה, והתבודדות אישית.</p>
+                <p>איך מדברים עם השם? הדרכה שלב אחר שלב על ברכות השחר, נטילת ידיים, תפילת עמידה, והתבודדות אישית.</p>
             </div>
             <div class="card">
                 <i class="fas fa-star-of-david"></i>
                 <h3>שבת וכשרות</h3>
-                <p>הכנסת הקדושה הביתה. מדריך פרקטי לשמירת שבת ראשונה ולשמירה על מטבח כשר, צעד אחר צעד.</p>
+                <p>הכנסת הקדושה הביתה. מדריך פרקטי וחומל לשמירת שבת ראשונה ולשמירה על מטבח כשר, צעד אחר צעד.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dictionary" style="background-color: var(--bg-soft);">
+        <h2 class="section-title">מושגי יסוד למתחילים</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">מילים ששומעים הרבה וחשוב להכיר בדרך החדשה:</p>
+        <div class="dictionary-grid">
+            <div class="term-box">
+                <h4>מוקצה</h4>
+                <p>חפצים שאסור להזיז בשבת (כמו טלפון נייד, כסף או כלי עבודה) כדי לשמור על אווירת המנוחה.</p>
+            </div>
+            <div class="term-box">
+                <h4>נטילת ידיים</h4>
+                <p>רחיצת ידיים טקסית עם כלי מיוחד (נטלא) בבוקר או לפני אכילת לחם, לשם טהרה והכנה.</p>
+            </div>
+            <div class="term-box">
+                <h4>ברכה ראשונה ואחרונה</h4>
+                <p>אמירת תודה קצרה להשם לפני שאוכלים או שותים משהו, וגם לאחר מכן.</p>
+            </div>
+            <div class="term-box">
+                <h4>בין אדם לחברו</h4>
+                <p>המצוות שקשורות ליחסים בין בני אדם (כבוד, צדקה, לשון הרע) - שהן חשובות לא פחות ממצוות דתיות.</p>
             </div>
         </div>
     </section>
 
     <section id="ai-rabbi" class="ai-section">
-        <h2 class="section-title ai-title">תשובות מיידיות עם <span>הרב AI</span></h2>
-        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
-            מנוע בינה מלאכותית מתקדם שעבר אימון על מקורות ההלכה והיהדות. שאל כל שאלה וקבל הדרכה מיידית. 
-            <br><small>(לשאלות הלכתיות מורכבות או אישיות, מומלץ תמיד להתייעץ עם רב אנושי בוואטסאפ למטה).</small>
+        <h2 class="section-title">תשובות מיידיות עם הרב AI</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; text-align: center;">
+            מנוע בינה מלאכותית שעבר אימון על מקורות ההלכה והיהדות. שאל כל שאלה (על כשרות, שבת, תפילות) וקבל הדרכה מיידית. 
+            <br><small>(לשאלות מורכבות או אישיות רגישות, פנה תמיד לרב בוואטסאפ למטה).</small>
         </p>
         
         <div class="iframe-container">
-            <iframe src="https://widget.rabbiai.app/he/chat/rabbi?display-mode=auto" title="Rabbi AI Chat"></iframe>
+            <iframe src="https://widget.rabbiai.app/he/chat/rabbi?display-mode=light" title="Rabbi AI Chat"></iframe>
         </div>
     </section>
 
     <section id="contact" class="whatsapp-section">
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">נתקלת בשאלה מורכבת?</h2>
-        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
-            יש דברים שדורשים מגע אנושי והכרות אישית. שלח הודעה וקבל מענה מכיל ומדויק על פי ההלכה.
+        <h2 class="section-title" style="margin-bottom: 15px;">נתקלת בשאלה מורכבת?</h2>
+        <p style="color: var(--text-dark); font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px;">
+            יש דברים שדורשים מגע אנושי, אוזן קשבת והכרות אישית. אנחנו כאן בשבילך לכל התלבטות.
         </p>
-        <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מהאתר%20ויש%20לי%20שאלה%20בנושא:" target="_blank" class="btn btn-whatsapp btn">
-            <i class="fab fa-whatsapp"></i> שלח הודעה לרב עכשיו
+        <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מאתר%20צעדים%20ויש%20לי%20שאלה:" target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> שלח הודעה ונתייעץ יחד
         </a>
     </section>
 
-    <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מהאתר%20ויש%20לי%20שאלה%20בנושא:" target="_blank" class="floating-wa" title="שאלות בהלכה?">
+    <a href="https://wa.me/972500000000?text=שלום,%20הגעתי%20מאתר%20צעדים%20ויש%20לי%20שאלה:" target="_blank" class="floating-wa" title="שאלות בהלכה?">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <footer>
-        <p>&copy; 2026 המקור - פלטפורמה טכנולוגית ליהדות מחברת. כל הזכויות שמורות.</p>
+        <p>&copy; 2026 צעדים - הבית לדרך חדשה. כל הזכויות שמורות.</p>
     </footer>
 
+    <script>
+        function toggleMenu() {
+            if (window.innerWidth <= 768) {
+                const navLinks = document.getElementById('navLinks');
+                navLinks.classList.toggle('active');
+            }
+        }
+    </script>
 </body>
 </html>
